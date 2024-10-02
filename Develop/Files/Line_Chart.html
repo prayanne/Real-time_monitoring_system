@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Line Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        time_delta0 = ['|', 0, 0];
+        time_delta1 = ['|', 0, 0];
+        time_delta2 = ['|', 0, 0];
+        time_delta3 = ['|', 0, 0];
+        time_delta4 = ['|', 0, 0];
+
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          time_delta0,
+          time_delta1,
+          time_delta2,
+          time_delta3,
+          time_delta4
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+
+    <div id="curve_chart"style="position:relative; width: 470px; height: 250px"></div>
+    
+    <script type="text/javascript">
+
+      var recv  = window.AppInventor.getWebViewString();
+      var recv_arr = JOSN.parse(recv);
+      
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      //표시부
+      function drawChart() {
+      	  
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+			recv_arr
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+        }
+    </script>
+
+  </body>
+</html>

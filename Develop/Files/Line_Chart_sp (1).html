@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Line Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        time_delta0 = ['|', 0, 0];
+        time_delta1 = ['|', 0, 0];
+        time_delta2 = ['|', 0, 0];
+        time_delta3 = ['|', 0, 1100];
+        time_delta4 = ['|', 0, 90];
+
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          time_delta0,
+          time_delta1,
+          time_delta2,
+          time_delta3,
+          time_delta4
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+
+    <div id="curve_chart"style="position:relative; width: 470px; height: 250px"></div>
+    
+    <script type="text/javascript">
+		
+		function recv(){
+		//recv = '|,70,90,|,90,80,|,50,90,|,70,90,|,80,90';
+		var recv = window.AppInventor.getWebViewString();
+		recv_arr = recv.split(',');
+		
+
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+		}
+		
+		//표시부
+		function drawChart() {
+
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          [recv_arr[0],Number(recv_arr[1]),Number(recv_arr[2])],
+          [recv_arr[3],Number(recv_arr[4]),Number(recv_arr[5])],
+          [recv_arr[6],Number(recv_arr[7]),Number(recv_arr[8])],
+          [recv_arr[9],Number(recv_arr[10]),Number(recv_arr[11])],
+          [recv_arr[12],Number(recv_arr[13]),Number(recv_arr[14])],
+          [recv_arr[15],Number(recv_arr[16]),Number(recv_arr[17])],
+          [recv_arr[18],Number(recv_arr[19]),Number(recv_arr[20])],
+          [recv_arr[21],Number(recv_arr[22]),Number(recv_arr[23])],
+          [recv_arr[24],Number(recv_arr[25]),Number(recv_arr[26])],
+          [recv_arr[27],Number(recv_arr[28]),Number(recv_arr[29])]
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+        }
+    </script>
+
+  </body>
+</html>

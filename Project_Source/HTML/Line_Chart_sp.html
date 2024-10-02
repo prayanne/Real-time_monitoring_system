@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Line Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        time_delta0 = ['|', 0, 0];
+        time_delta1 = ['|', 0, 0];
+        time_delta2 = ['|', 0, 0];
+        time_delta3 = ['|', 0, 1100];
+        time_delta4 = ['|', 0, 90];
+
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          time_delta0,
+          time_delta1,
+          time_delta2,
+          time_delta3,
+          time_delta4
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+
+    <div id="curve_chart"style="position:relative; width: 470px; height: 250px"></div>
+    
+    <script type="text/javascript">
+      var recv = window.AppInventor.getWebViewString();
+      var recv_arr = recv.split(',');
+
+      document.write(recv_arr);
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      //표시부
+      function drawChart() {
+      	  
+        
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          [recv_arr[0],Number(recv_arr[1]),Number(recv_arr[2])],
+          [recv_arr[3],Number(recv_arr[4]),Number(recv_arr[5])],
+          [recv_arr[6],Number(recv_arr[7]),Number(recv_arr[8])],
+          [recv_arr[9],Number(recv_arr[10]),Number(recv_arr[11])],
+          [recv_arr[12],Number(recv_arr[13]),Number(recv_arr[14])]
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+        }
+    </script>
+
+  </body>
+</html>

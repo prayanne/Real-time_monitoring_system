@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Line Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ 
+    <script type="text/javascript">
+
+      var time_delta0 = ['|', 10, 98];
+      var time_delta1 = ['|', 20, 50];
+      var time_delta2 = ['|', 30, 50];
+      var time_delta3 = ['|', 40, 50];
+      var time_delta4 = ['|', 0, 50];
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      //표시부
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          time_delta0,
+          time_delta1,
+          time_delta2,
+          time_delta3,
+          time_delta4
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+        }
+        //수신부
+        function recv(){
+          var recv  = window.AppInventor.getWebViewString();
+          var arr = recv.split(",");
+
+          var value0 = Number(arr[1]);
+          var value1 = Number(arr[2]);
+
+          time_delta0 = time_delta1;
+          time_delta1 = time_delta2;
+          time_delta2 = time_delta3;
+          time_delta3 = time_delta4;
+          time_delta4 = [arr[0], value0, value1];
+        }
+        
+    </script>
+
+  </head>
+  <body>
+
+    <div id="curve_chart"style="position:relative; width: 470px; height: 250px"></div>
+    
+    <script type="text/javascript">
+/*
+      var time_delta0 = ['|', 10, 98];
+      var time_delta1 = ['|', 20, 50];
+      var time_delta2 = ['|', 30, 50];
+      var time_delta3 = ['|', 40, 50];
+      var time_delta4 = ['|', 0, 50];
+
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      //표시부
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'BPM', 'SPO2'],
+          time_delta0,
+          time_delta1,
+          time_delta2,
+          time_delta3,
+          time_delta4
+        ]);
+
+        var options = {
+          title: 'BPM & SPO2',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+        }
+        //수신부
+        function recv(){
+          var recv  = window.AppInventor.getWebViewString();
+          var arr = recv.split(",");
+
+          var value0 = Number(arr[1]);
+          var value1 = Number(arr[2]);
+
+          time_delta0 = time_delta1;
+          time_delta1 = time_delta2;
+          time_delta2 = time_delta3;
+          time_delta3 = time_delta4;
+          time_delta4 = [arr[0], value0, value1];
+        }
+        */
+    </script>
+
+  </body>
+</html>
